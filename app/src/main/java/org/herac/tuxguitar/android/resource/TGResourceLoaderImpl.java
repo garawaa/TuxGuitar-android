@@ -24,7 +24,7 @@ import dalvik.system.DexClassLoader;
 public class TGResourceLoaderImpl implements TGResourceLoader {
 
 	private static final String ASSET_PLUGINS = "plugins";
-	private static final Integer ASSET_BUFFER_SIZE = (8 * 1024);
+	//private static final Integer ASSET_BUFFER_SIZE = (8 * 1024);
 
 	private static ClassLoader classLoader;
 
@@ -96,9 +96,9 @@ public class TGResourceLoaderImpl implements TGResourceLoader {
 
 					InputStream inputStream = new BufferedInputStream(assetManager.open(ASSET_PLUGINS + File.separator + asset));
 					OutputStream outputStream = new BufferedOutputStream(new FileOutputStream(pluginFileName));
-					byte[] buffer = new byte[ASSET_BUFFER_SIZE];
+					byte[] buffer = new byte[8192];
 					int length = 0;
-					while((length = inputStream.read(buffer, 0, ASSET_BUFFER_SIZE)) > 0) {
+					while((length = inputStream.read(buffer, 0, 8192)) > 0) {
 						outputStream.write(buffer, 0, length);
 					}
 					outputStream.close();
